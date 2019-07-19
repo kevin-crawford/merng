@@ -7,7 +7,7 @@ const resolvers = require("./graphql/resolvers");
 // Bring in mongodb server string from config
 const { MONGODB } = require("./config.js");
 
-// inititalize subscription service
+// initialize subscription service
 const pubSub = new PubSub();
 
 // initialize apollo server with our type definitions, resolvers
