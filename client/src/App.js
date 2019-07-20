@@ -9,9 +9,11 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
 
+// CSS semantic ui styling, add semantic class names to enable
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
+// holds all of our routes and static page view components
 function App() {
   return (
     <Router>
