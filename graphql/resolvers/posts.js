@@ -8,6 +8,7 @@ module.exports = {
   Query: {
     // query all posts
     async getPosts() {
+      console.log("get post");
       try {
         const posts = await Post.find().sort({ createdAt: -1 });
         return posts;
@@ -17,6 +18,7 @@ module.exports = {
     },
     // query one post
     async getPost(_, { postId }) {
+      console.log("get post");
       try {
         const post = await Post.findById(postId);
         if (post) {
@@ -31,11 +33,12 @@ module.exports = {
   },
   Mutation: {
     async createPost(_, { body }, context) {
+      console.log("create Post");
       // check if user is logged in using helper function checkAuth
       const user = checkAuth(context);
 
       // check if post body is empty
-      if (arguments.body.trim() === "") {
+      if (body.trim() === "") {
         throw new Error("Post body must not be empty");
       }
 
