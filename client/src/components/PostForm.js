@@ -7,19 +7,27 @@ import { useMutation } from "@apollo/react-hooks";
 import { useForm } from "../util/hooks";
 import { FETCH_POST_QUERY } from "../util/graphql";
 
+//
 function PostForm() {
+  // use the customer form hook we created for login/register logic
   const { values, onChange, onSubmit } = useForm(createPostCallback, {
     body: ""
   });
 
+  // pull the created post and any errors from the apollo mutation
+  // pass our graph ql query as an arg, along with the form values as variables
+  // update function
+  // proxy will read the fetch post query
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     update(proxy, result) {
+      // set data variable to
       const data = proxy.readQuery({
         query: FETCH_POST_QUERY
       });
       data.getPosts = [result.data.createPost, ...data.getPosts];
       proxy.writeQuery({ query: FETCH_POST_QUERY, data });
+      // set values back to empty
       values.body = "";
     }
   });

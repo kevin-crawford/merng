@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // components
 import MenuBar from "./components/MenuBar";
 import AuthRoute from "./util/AuthRoute";
-
+import SinglePost from "./components/SinglePost";
 // AUTHORIZATION PROVIDER
 import { AuthProvider } from "./context/auth";
 
@@ -16,6 +16,7 @@ import Register from "./pages/register";
 // CSS semantic ui styling, add semantic class names to enable
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
+import { Container } from "semantic-ui-react";
 
 // holds all of our routes and static page view components
 // all routes have auth context wrapped around the component
@@ -26,12 +27,13 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="ui container">
+        <Container>
           <MenuBar />
           <Route exact path="/" component={Home} />
           <AuthRoute exact path="/login" component={Login} />
           <AuthRoute exact path="/register" component={Register} />
-        </div>
+          <Route exact path="/posts/:postId" component={SinglePost} />
+        </Container>
       </Router>
     </AuthProvider>
   );
